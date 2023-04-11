@@ -1,0 +1,87 @@
+1- initiate json file - configure .prettierrc
+        "dependencies": {
+                "bcryptjs": "^2.4.3",
+                "dotenv": "^16.0.3",
+                "express": "^4.18.2",
+                "jsonwebtoken": "^8.5.1",
+                "mongoose": "^6.6.5",
+                "morgan": "^1.10.0",
+                "ndb": "^1.1.5",
+                "nodemailer": "^6.8.0",
+                "slugify": "^1.6.5",
+                "validator": "^13.7.0"
+                },
+        "devDependencies": {
+                "nodemon": "^2.0.20"
+                }
+2- install express, mongoose, dotenv , nodemon
+3- create server and configure .configenv.json
+4- separate routes and controllers
+5- configure ESLint
+6- connect to mongoo db using mongoose
+7- buid mongoose schema and model
+8- implement the CRUD operation with mongoose and express
+9- implement 
+        advanced filter
+        sort
+        selectFields
+        pagination
+        some aliasing => top 5 cheap tours
+10- refactoring step N.9 with external calss that holds all the functions in step No.9
+11- aggregation pipelines and statistics
+        api statistics
+        monthly tours in a certain year unwind
+12- virtuals in the schema
+13- Mongodb Middleware
+        document Middleware
+        queryMiddleware
+        aggregation Middleware
+14- data validation + custome
+15- error handling
+        1- Unhandled routes
+        2- Global error handler
+        3- Refactoring => global Error function and AppError class
+        4- Error handling for Async functions
+        5- Adding 404 not found error
+        6- Handling error during development and production
+        7- Transoforming programming errors to Appllications error to handle the following errors
+                - Invalid database Invalid
+                - Duplicate values in a collection
+                - Validation errors such as (enum or more than values)
+        8- Errors outside express
+                - Unhandled promise rejection
+                - Catch Uncaught exception
+
+16- Authentication
+        1- Modelling users
+        2- Create users (signUp)
+        3- Password management
+                - Hashing passwords
+                - Validate password confirmation
+        4- Signing up with jwt >> Generate token and return it
+        5- Login with jwt 
+                . Get form data (email and password)
+                . Check if email and password exist inthe form (not empty fields)
+                . Check if user is exist
+                . compare form password with the database password (using instance methd)
+                . generate token and send it to the client if every thing is ok
+        6- Protecting some routes -> only applied for authenticated uers
+                . Get token and check if it is exist
+                . verify token then handle error for JsonWebTokenError and TokenExpiredError
+                . Check if user still exist
+                . Check if user change password after token is issued (using an instance method)
+        7- Postman configuration
+                . Envieronments {{}}
+                . Automate copying token for Bearer in headers by making programatic variables in signUp and login
+        8- Password reset and reset token
+                --forgot passord function
+                        . Get the user based on submitted email
+                        . Generate random password reset token (using instatnce method)
+                        . send it to user's mail
+                -- Password reset functionality
+                        . Get user based on reset password token
+                        . If token has not expired and there is a user then set new password
+                        . Update passwordResetChangedAt field in USer model
+                        . Log in and send token to the client
+        9- Updating the current user password
+        10- Updating the current user data
