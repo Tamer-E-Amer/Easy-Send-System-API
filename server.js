@@ -9,8 +9,7 @@ dotenv.config({ path: "./config.env" });
 const PORT = process.env.PORT || 4000;
 
 // DB connection
-const connectionStatus = process.env.CONNECTION_STATUS;
-const dbVariables = getDBVariables(connectionStatus);
+const dbVariables = getDBVariables();
 console.log("dbVariables:", dbVariables);
 
 DBConnect({ ...dbVariables });

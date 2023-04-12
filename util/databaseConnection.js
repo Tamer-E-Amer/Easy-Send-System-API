@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 /**
  * @description this function is used to get the database connection variables such as database query string and database host whether it is stored locally or on the cloud and that is according to passed connection status as a parameter
- * @param {*} connStatus
+ *
  * @returns {variables} // database variables i.e: db connection string and db host
  */
-export const getDBVariables = (connStatus) => {
+export const getDBVariables = () => {
+  const connStatus = process.env.CONNECTION_STATUS;
   const variables =
     connStatus === "online"
       ? {
