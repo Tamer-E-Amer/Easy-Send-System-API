@@ -55,7 +55,10 @@ const appProblemSChema = mongoose.Schema({
     type: String,
     maxlength: [200, "Your note should with maximum length 200 character "],
   },
-  createdAt: Date,
+  createdAt: {
+    type: Date,
+    default: Date.now(),
+  },
   updatedAt: Date,
 });
 
