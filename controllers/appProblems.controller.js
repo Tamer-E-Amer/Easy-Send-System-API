@@ -2,11 +2,29 @@
  * Application problems controllers
  */
 import AppProblem from "../models/appProblems.model.js";
+
 // 1- Get all application problems
 
 export const getAllAppProblems = async (req, res) => {
   try {
-    const appProblemsData = await AppProblem.find();
+    // const appProblemsData = await AppProblem.find(req.query);
+    /**
+     * @description: req.query will fail with pagination and sorting the query so we should exclude the fields of paginination an d sorting from teh query
+     */
+    const queryObj = { ...req.query }; // shallowing the req.query
+    const excludedField = ["page", "limit", "sort", "fields"];
+    excludedField.forEach((el) => delete queryObj[el]);
+
+    // handling gt|gte|lt|lte in req.query
+    let queryString = JSON.stringify(queryObj);
+    queryString = queryString.replace(
+      /\b(gt|gte|le|lte)\b/g,
+      (match) => `$${match}`
+    );
+
+    // const appProblemsData = await AppProblem.find(queryObj);
+    const appProblemsData = await AppProblem.find(queryString);
+
     res.status(200).json({
       status: "success",
       count: appProblemsData.length,
@@ -17,7 +35,7 @@ export const getAllAppProblems = async (req, res) => {
   } catch (error) {
     res.status(400).json({
       status: "fail",
-      message: "Error getting data",
+      message: error,
     });
   }
 };

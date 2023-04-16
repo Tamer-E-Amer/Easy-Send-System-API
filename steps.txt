@@ -22,11 +22,12 @@
 7- buid mongoose schema and model
 8- implement the CRUD operation with mongoose and express
 9- implement 
-        advanced filter
-        sort
-        selectFields
-        pagination
-        some aliasing => top 5 cheap tours
+        - advanced filter using request query (excluding page limit sort fields)
+        - handling greater than and less than operator
+        - sort
+        - selectFields
+        - pagination
+        - some aliasing => top 5 cheap tours
 10- refactoring step N.9 with external calss that holds all the functions in step No.9
 11- aggregation pipelines and statistics
         api statistics
