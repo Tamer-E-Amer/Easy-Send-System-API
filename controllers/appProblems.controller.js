@@ -2,60 +2,16 @@
  * Application problems controllers
  */
 import AppProblem from "../models/appProblems.model.js";
-
+import APIFeature from "../util/apiFeatures.js";
 // 1- Get all application problems
 
 export const getAllAppProblems = async (req, res) => {
   try {
-    // const appProblemsData = await AppProblem.find(req.query);
-    /**
-     * @description: req.query will fail with pagination and sorting the query so we should exclude the fields of paginination an d sorting from teh query
-     */
-    const queryObj = { ...req.query }; // shallowing the req.query
-    const excludedField = ["page", "limit", "sort", "fields"];
-    excludedField.forEach((el) => delete queryObj[el]);
-
-    // handling gt|gte|lt|lte in req.query
-    let queryString = JSON.stringify(queryObj);
-    queryString = queryString.replace(
-      /\b(gt|gte|le|lte)\b/g,
-      (match) => `$${match}`
-    );
-
-    // const appProblemsData = await AppProblem.find(queryObj);
-    let query = AppProblem.find(JSON.parse(queryString));
-
-    // Sorting
-    if (req.query.sort) {
-      const sortBy = req.query.sort.split(",").join(" ");
-      query = query.sort(sortBy);
-    } else {
-      query = query.sort("-createdAt");
-    }
-
-    // Projection: selected field or field limitig
-
-    if (req.query.fields) {
-      const selectedFields = req.query.fields.split(",").join(" ");
-      query = query.select(selectedFields);
-    } else {
-      query = query.select("-__v");
-    }
-
-    // pagination
-    const page = req.query.page || 1;
-    const limit = req.query.limit || 10;
-    const skip = (page - 1) * limit;
-
-    // Test if there is no more pages
-    if (req.query.page) {
-      const appProblemsCount = await AppProblem.countDocuments();
-      if (skip >= appProblemsCount) console.log("No more pages.."); // TODO: handling in Error handling
-    }
-
-    query = query.skip(skip).limit(limit);
-
-    const appProblemsData = await query;
+    const features = new APIFeature(AppProblem.find(), req.query)
+      .filter()
+      .sort()
+      .paginate();
+    const appProblemsData = await features.query;
     res.status(200).json({
       status: "success",
       count: appProblemsData.length,
