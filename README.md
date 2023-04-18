@@ -32,22 +32,20 @@ You can run the aplication n your local machin using this command **npm start**
   - Create an application problem: 127.0.0.1:5000/api/v1/appProblems/
 
         ## try it out as the following
-        - ```json
-        {
 
-    "applicationName": "Buildings tax",
-    "version": "4.1.8",
-    "problem": "test message: run time error in Buildings tax application",
-    "problemDescription": "Test description:This is a tes description of the problem",
-    "images": [
-    "7.jpg"
-    ],
-    "office": "Damietta-080",
-    "isGeneral": false,
-    "computerIP": "10.12.13.124",
-    "user": "test user 080",
-    "status": "closed",
-    "notes": "Test notes here",
+    ```json
+    {
+      "applicationName": "Buildings tax",
+      "version": "4.1.8",
+      "problem": "test message: run time error in Buildings tax application",
+      "problemDescription": "Test description:This is a tes description of the problem",
+      "images": ["7.jpg"],
+      "office": "Damietta-080",
+      "isGeneral": false,
+      "computerIP": "10.12.13.124",
+      "user": "test user 080",
+      "status": "closed",
+      "notes": "Test notes here"
     }
     ```
 
